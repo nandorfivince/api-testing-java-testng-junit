@@ -1,0 +1,72 @@
+apply plugin: 'java'
+apply plugin: 'java-library-distribution'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    restapitest
+}
+
+configurations {
+    restapitestCompile {
+        extendsFrom testCompile
+    }
+    restapitestRuntime {
+        extendsFrom testRuntime
+    }
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+test {
+    useTestNG()
+    onlyIf{ false }
+}
+
+task smokeTest(type: Test) {
+    useTestNG()
+    include 'src/test/java/restapitests/**'
+    onlyIf {
+        project.hasProperty("enabled")
+    }
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+dependencies {
+    compile ("com.google.guava:guava:20.0")
+    compile (group: "org.awaitility", name: "awaitility", version: "+")
+    compile ("org.testng:testng:6.14.3")
+    compile (group: "org.skyscreamer", name: "jsonassert", version: "1.5.0")
+    compile ("org.codehaus.groovy:groovy-all:+")
+    compile (group: "org.jsoup", name: "jsoup", version: "+")
+    compile ("com.squareup.okhttp3:okhttp:3.9.1")
+    compile ("com.squareup.okhttp3:okhttp-urlconnection:3.9.1")
+    compile ("com.jayway.restassured:rest-assured:+")
+    compile ("com.jayway.restassured:json-path:+")
+    compile (group: "io.rest-assured", name: "rest-assured", version: "+")
+    compile (group: "com.github.fge", name: "json-schema-validator", version: "+")
+    compile (group: "com.github.fge", name: "json-schema-core", version: "+")
+    compile (group: "io.rest-assured", name: "json-schema-validator", version: "+")
+    compile (group:"org.slf4j", name:"slf4j-simple", version:"+")
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.10.0'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.10.0'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.0'
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
+    restapitestCompile "ch.qos.logback:logback-classic: 2.0.0"
+    restapitestCompile sourceSets.main.output
+    restapitestCompile sourceSets.test.output
+}

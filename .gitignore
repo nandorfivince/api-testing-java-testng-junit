@@ -1,3 +1,12 @@
+/build
+/out
+.gradle
+.idea
+/gradle
+**/*.iml
+**/*.ipr
+**/*.iws
+
 # Compiled class file
 *.class
 
