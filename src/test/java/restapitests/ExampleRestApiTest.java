@@ -1,6 +1,6 @@
 package restapitests;
 
-import helpers.RequestSpecificationHelper;
+import restapihelpers.RequestSpecificationHelper;
 import io.restassured.http.ContentType;
 import io.restassured.http.Method;
 import org.json.JSONException;
@@ -9,8 +9,8 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-import static helpers.Config.*;
-import static helpers.TestDataProvider.*;
+import static restapihelpers.Config.*;
+import static restapihelpers.TestDataProvider.*;
 import static io.restassured.http.ContentType.JSON;
 import static io.restassured.http.Method.GET;
 import static io.restassured.http.Method.POST;
