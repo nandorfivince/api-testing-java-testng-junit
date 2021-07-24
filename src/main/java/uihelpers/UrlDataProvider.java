@@ -10,4 +10,5 @@ public class UrlDataProvider {
     public static final String LOAD_RUNNER_CERTIFICATION_PAGE = BASE_URL + "/index.php?option=com_content&view=article&id=255&Itemid=672";
     public static final String OUR_BLOG_PAGE = BASE_URL + "/index.php?option=com_k2&view=itemlist&layout=category&task=category&id=1&Itemid=496";
     public static final String CONTACT_US_PAGE = BASE_URL + "/index.php?option=com_contact&view=contact&id=1&Itemid=498";
+    public static final String CAMEL_CLUB_HOME_PAGE = "https://www.teveclub.hu/";
 }

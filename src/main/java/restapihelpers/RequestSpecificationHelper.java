@@ -31,6 +31,7 @@ public class RequestSpecificationHelper {
         Response response = requestSpecification
                 .when()
                 .request(requestMethod, endpointPath);
+        Thread.sleep(1250);
         Assert.assertEquals(response.statusCode(), responseStatusCode);
         if (responseBodyJsonResourceName != null) {
             JSONAssert.assertEquals(readByName(responseBodyJsonResourceName), response.getBody().asString(), true);

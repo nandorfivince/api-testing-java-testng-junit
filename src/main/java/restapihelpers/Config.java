@@ -24,14 +24,17 @@ public class Config {
 
     public static String getListUsersServiceBaseUrl() {
         return REQRES_BASE_URL + "/users?page=2";
+        //return DEFAULT_BASE_URL + "/users?page=2";
     }
 
-    public static String getSingleUserServiceBaseUrl() {
-        return REQRES_BASE_URL + "/users/2";
+    public static String getRegisterUserBaseUrl() {
+        return REQRES_BASE_URL + "/register";
+        //return DEFAULT_BASE_URL + "/users/2";
     }
 
     public static String getCreateDataServiceBaseUrl() {
         return REQRES_BASE_URL + "/users";
+        //return DEFAULT_BASE_URL + "/users";
     }
 
 }

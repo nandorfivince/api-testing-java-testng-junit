@@ -16,9 +16,11 @@ public class RequestSpecificationFactory {
     private TokenTransfer tokenTransfer = new TokenTransfer();
 
     public RequestSpecification create() throws IOException {
+
         if (isSecuredEnvironment()) {
-            String token = tokenTransfer.getToken(PROTECTED_SITE_BASE_URL, CAS_TEST_USER, CAS_PASSWORD);
-            return given().auth().oauth2(token);
+            //String token = tokenTransfer.getToken(PROTECTED_SITE_BASE_URL, CAS_TEST_USER, CAS_PASSWORD);
+            //return given().auth().oauth2(token);
+            return given().relaxedHTTPSValidation();
         } else {
             return given().auth().preemptive().basic("testuser", "hulllalllllllaaaaaa");
         }

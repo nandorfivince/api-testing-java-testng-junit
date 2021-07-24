@@ -10,10 +10,9 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 import static restapihelpers.Config.*;
-import static restapihelpers.TestDataProvider.*;
 import static io.restassured.http.ContentType.JSON;
-import static io.restassured.http.Method.GET;
-import static io.restassured.http.Method.POST;
+import static io.restassured.http.Method.*;
+import static restapihelpers.TestDataProvider.*;
 
 public class ExampleRestApiTest {
 
@@ -22,10 +21,10 @@ public class ExampleRestApiTest {
     @DataProvider(name = "testData")
     public static Object[][] testDataTable() {
         return new Object[][]{
-                {"TC001", POST, JSON, getCreateDataServiceBaseUrl(), CREATE_USER_JSON, 200, null, null, null},
+                {"TC001", POST, JSON, getCreateDataServiceBaseUrl(), CREATE_USER_JSON, 201, null, null, null},
                 {"TC002", GET, JSON, getListUsersServiceBaseUrl(), null, 200, GET_LIST_OF_USERS_JSON, null, null},
-                {"TC003", POST, JSON, getSingleUserServiceBaseUrl(), null, 200, null, "data.email", "janet.weaver@reqres.in"},
-                {"TC004", GET, JSON, getSingleUserServiceBaseUrl(), null, 200, GET_SINGLE_USER_JSON, null, null},
+                {"TC003", POST, JSON, getRegisterUserBaseUrl(), REGISTER_SUCCESSFUL_USER_JSON, 200, null, "id", "4"},
+                {"TC004", POST, JSON, getRegisterUserBaseUrl(), REGISTER_UNSUCCESSFUL_USER_JSON, 400, null, "error", "Missing password"}
         };
     }
 

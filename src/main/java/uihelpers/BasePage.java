@@ -43,13 +43,13 @@ public abstract class BasePage extends Driver {
         delay(DELAY_MIC);
         return getInstance().switchTo().window(windowHandlerParam);
     }
-
+/*
     public void waitUntilAlertIsPresent() {
         new WebDriverWait(getInstance(), 60)
                 .ignoring(NoAlertPresentException.class)
                 .until(ExpectedConditions.alertIsPresent());
     }
-
+ */
     protected void alertOK() {
         Alert alert = getInstance().switchTo().alert();
         alert.accept();
@@ -68,9 +68,11 @@ public abstract class BasePage extends Driver {
         getElementWithFluentWait(getLocatorFromMyDict(elemKey));
     }
 
+    /*
     public final void waitUntilElementClickable(String elemKey) {
         wait.until(ExpectedConditions.elementToBeClickable(getLocatorFromMyDict(elemKey)));
     }
+     */
 
     public boolean isElementDisplayed(String elemKey) {
         boolean isDisplayed = false;
