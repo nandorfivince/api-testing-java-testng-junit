@@ -5,11 +5,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pageobjects.CamelFeederPageObj;
 import uihelpers.Driver;
 import uihelpers.UrlDataProvider;
+
+import java.util.List;
 
 
 @DisplayName("Camel Feeder Test")
@@ -17,7 +20,7 @@ import uihelpers.UrlDataProvider;
 public class CamelFeederTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CamelFeederTest.class);
-    private CamelFeederPageObj camelFeederPageObj = new CamelFeederPageObj();
+    private final CamelFeederPageObj camelFeederPageObj = new CamelFeederPageObj();
 
     @Test
     @DisplayName("PRECONDITION")
@@ -31,15 +34,49 @@ public class CamelFeederTest {
 
     @Test
     @DisplayName("TEST CASE")
-    void test2() throws InterruptedException {
-        LOGGER.info("Action");
-        Driver.getInstance().findElement(By.xpath("(//*[contains(@name,'etet')])[2]")).click();
-        Thread.sleep(3000);
+    void test2() {
+        LOGGER.info("Feeding");
+        try {
+            Driver.getInstance().findElement(By.name("kaja")).click();
+            List<WebElement> days = Driver.getInstance().findElements(By.xpath("(//*[contains(@name,'kaja')])[2]/option"));
+
+            if (days.size() <= 7) {
+                String xpathSelector = "((//*[contains(@name,'kaja')])[2]/option)[%s]";
+                System.out.println("Remained numbers of food days: " + days.size());
+                String numberOfDays = String.valueOf(days.size());
+                String fullXpath = String.format(xpathSelector, numberOfDays);
+                Driver.getInstance().findElement(By.xpath(fullXpath)).click();
+                Driver.getInstance().findElement(By.xpath("(//*[contains(@name,'etet')])[2]")).click();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    @DisplayName("TEST CASE")
+    void test3() {
+        LOGGER.info("Drinking");
+        try {
+            Driver.getInstance().findElement(By.name("pia")).click();
+            List<WebElement> days = Driver.getInstance().findElements(By.xpath("(//*[contains(@name,'pia')])[2]/option"));
+
+            if (days.size() <= 7) {
+                String xpathSelector = "((//*[contains(@name,'pia')])[2]/option)[%s]";
+                System.out.println("Remained numbers of drink days: " + days.size());
+                String numberOfDays = String.valueOf(days.size());
+                String fullXpath = String.format(xpathSelector, numberOfDays);
+                Driver.getInstance().findElement(By.xpath(fullXpath)).click();
+                Driver.getInstance().findElement(By.xpath("(//*[contains(@name,'etet')])[2]")).click();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     @DisplayName("POSTCONDITION")
-    void test3() {
+    void test4() {
         LOGGER.info("Postcondition");
         camelFeederPageObj.closeBrowser();
     }
