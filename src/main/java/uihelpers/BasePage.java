@@ -124,8 +124,10 @@ public abstract class BasePage extends Driver {
     }
 
     public void typeTextToElement(String elemKey, String textToType) {
-        clearTextBoxContent(elemKey);
-        getInstance().findElement(getLocatorFromMyDict(elemKey)).sendKeys(textToType);
+        //clearTextBoxContent(elemKey);
+        //getInstance().findElement(getLocatorFromMyDict(elemKey)).sendKeys(textToType);
+
+        Driver.getInstance().findElement(By.name(elemKey)).sendKeys(textToType);
     }
 
     public void sendUnicodeChars(String elemKey, Keys keyToSend) {
@@ -137,7 +139,15 @@ public abstract class BasePage extends Driver {
     }
 
     public void clickOnElement(String elemKey) {
-        getInstance().findElement(getLocatorFromMyDict(elemKey)).click();
+        //getInstance().findElement(getLocatorFromMyDict(elemKey)).click();
+
+        Driver.getInstance().findElement(By.name(elemKey)).click();
+    }
+
+    public void doubleClickOnElement(String elemKey) {
+        //getInstance().findElement(getLocatorFromMyDict(elemKey)).click();
+
+        Driver.getInstance().findElement(By.name(elemKey)).click();
     }
 
     public void setFrameParent() {

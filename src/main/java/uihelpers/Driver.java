@@ -12,7 +12,7 @@ public class Driver {
     private static String BASE_URL = UrlDataProvider.BASE_URL;
     private static WebDriver driver = null;
 
-    static WebDriver getInstance() {
+    public static WebDriver getInstance() {
         if (driver == null) {
             if (System.getProperty("current.browser") != null) {
                 if (System.getProperty("current.browser").equals("Chrome")) {

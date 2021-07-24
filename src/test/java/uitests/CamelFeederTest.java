@@ -4,10 +4,11 @@ import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runners.MethodSorters;
+import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pageobjects.CamelFeederPageObj;
-import pageobjects.ContactUsPageObj;
+import uihelpers.Driver;
 import uihelpers.UrlDataProvider;
 
 
@@ -16,49 +17,31 @@ import uihelpers.UrlDataProvider;
 public class CamelFeederTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CamelFeederTest.class);
-    private ContactUsPageObj contactUsPageObj = new ContactUsPageObj();
     private CamelFeederPageObj camelFeederPageObj = new CamelFeederPageObj();
 
     @Test
     @DisplayName("PRECONDITION")
     void test1() {
         LOGGER.info("Precondition");
-        camelFeederPageObj.changeURL(UrlDataProvider.CAMEL_CLUB_HOME_PAGE);
-        camelFeederPageObj.isElementDisplayed("NameOfTheCamel");
-        camelFeederPageObj.isElementDisplayed("Password");
-        camelFeederPageObj.clickOnElement("NameOfTheCamel");
-        camelFeederPageObj.typeTextToElement("NameOfTheCamel", "Miszter csimpi");
-        camelFeederPageObj.clickOnElement("Password");
-        camelFeederPageObj.typeTextToElement("Password", "AlmaKorte00");
-        camelFeederPageObj.clickOnElement("LoginButton");
+        Driver.getInstance().navigate().to(UrlDataProvider.CAMEL_CLUB_HOME_PAGE);
+        Driver.getInstance().findElement(By.name("tevenev")).sendKeys("Miszter csimpi");
+        Driver.getInstance().findElement(By.name("pass")).sendKeys("AlmaKorte00");
+        Driver.getInstance().findElement(By.cssSelector("input[type=image]:nth-child(1)")).click();
     }
 
-    /*
     @Test
     @DisplayName("TEST CASE")
-    void test2() {
+    void test2() throws InterruptedException {
         LOGGER.info("Action");
-        int randomNum = contactUsPageObj.getRandomNum();
-        contactUsPageObj.changeURL(UrlDataProvider.BASE_URL);
-        contactUsPageObj.changeURL(UrlDataProvider.CONTACT_US_PAGE);
-        contactUsPageObj.isElementDisplayed("ContactFormLabel");
-        contactUsPageObj.isElementDisplayed("NameTextBox");
-        contactUsPageObj.clickOnElement("NameTextBox");
-        contactUsPageObj.typeTextToElement("NameTextBox", "vincikusz" + randomNum);
-        contactUsPageObj.isElementDisplayed("EmailTextBox");
-        contactUsPageObj.clickOnElement("EmailTextBox");
-        contactUsPageObj.typeTextToElement("EmailTextBox", "valami@valami.com");
-        contactUsPageObj.isElementDisplayed("SubjectTextBox");
-        contactUsPageObj.clickOnElement("SubjectTextBox");
-        contactUsPageObj.typeTextToElement("SubjectTextBox", "hulla llaaaaa" + randomNum);
+        Driver.getInstance().findElement(By.xpath("(//*[contains(@name,'etet')])[2]")).click();
+        Thread.sleep(3000);
     }
-     */
 
     @Test
     @DisplayName("POSTCONDITION")
     void test3() {
         LOGGER.info("Postcondition");
-        contactUsPageObj.closeBrowser();
+        camelFeederPageObj.closeBrowser();
     }
 
 }
